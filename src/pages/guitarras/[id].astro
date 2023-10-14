@@ -1,0 +1,109 @@
+---
+import type { GetStaticPaths } from "astro";
+
+import Layout from "../../layouts/Layout.astro"
+
+export async function getStaticPaths() {
+    const url = `${import.meta.env.PUBLIC_API_URL}/guitarras?populate=image`
+    const answer = await fetch(url)
+    const {data} = await answer.json()
+    return  data.map(guitar => ({
+        params: {
+            id: guitar.attributes.url
+        },
+        props: {
+            guitar: guitar.attributes
+        }
+    }))
+}
+//console.log(Astro.params)
+const { name, image, description, price} = Astro.props.guitar
+---
+<Layout title={name} description="Guitar Shop, courses, blogs and more">
+    <main class="guitar">
+        <img src={image.data.attributes.url} alt={`Image Guitar ${name}`}/>
+
+        <div class="content">
+            <h3>{name}</h3>
+            <p class="description">{description}</p>
+            <p class="price">${price}</p>
+
+            <form class="form">
+                <label for="quantity">Quantity:</label>
+                <select id="quantity">
+                    <option value="0">--Select--</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <input type="submit" value="Add Cart">
+            </form>
+        </div>
+    </main>
+
+</Layout>
+
+<style>
+.guitar {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 1rem;
+    align-items: center;
+    max-width: 70rem;
+    margin: 0 auto;
+}
+.content {
+    padding: 1rem;
+}
+.content h3 {
+    font-size: 3rem;
+    text-transform: uppercase;
+    color: var(--primary);
+}
+.description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 6;
+    overflow: hidden;
+    font-size: 1.8rem;
+}
+.price {
+    color: var(--primary);
+    font-size: 4rem;
+    margin: 0;
+    font-weight: 900;
+}
+.form {
+    margin-top: 4rem;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+}
+.form label {
+    font-size: 2.2rem;
+}
+.form select {
+    border: 1px solid var(--black);
+    padding: 1rem;
+    text-align: center;
+    border-radius: 1rem;
+}
+.form input[type="submit"] {
+    display: block;
+    width: 100%;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    padding: 1.4rem;
+    background-color: var(--black);
+    color: var(--white);
+    transition-property: background-color;
+    transition-duration: 300ms;
+}
+.form input[type="submit"]:hover {
+    background-color: var(--primary);
+    cursor: pointer;
+}
+</style>

@@ -1,0 +1,50 @@
+---
+export interface Props {
+    title: string;
+    content: string;
+    image: string;
+}
+const {title, content, image} = Astro.props
+const backgroundImage = `url(${image})`
+---
+<style define:vars={{backgroundImage}}>
+    .course{
+        background-image: linear-gradient(to right, rgb( 0 0 0 / .65), rgb( 0 0 0 / .85)), var(--backgroundImage);
+    }
+</style>
+
+<section class="course">
+    <div class="conteiner grid">
+        <div class="content">
+
+            <h2 class="heading">{title}</h2>
+            <p>{content}</p>
+        </div>
+    </div>
+</section>
+<style>
+    	.course {
+    padding: 10rem 0;
+    margin-top: 10rem;
+    background-size: cover;
+    background-position: center center;
+}
+@media (min-width: 768px) {
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .content {
+        grid-column: 2 / 3;
+    }
+}
+.course p {
+    text-align: center;
+    font-size: 2.4rem;
+    color: var(--white);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 7;
+    overflow: hidden;
+}
+</style>

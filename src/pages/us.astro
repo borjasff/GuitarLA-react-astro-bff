@@ -1,0 +1,31 @@
+---
+import us from "../img/nosotros.jpg"
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Us" description="Guitar Shop, courses, blogs and more">
+	<main class="conteiner">
+		<h1 class="heading">About Us</h1>
+        <div class="content">
+            <img src={us.src} alt="Image about us">
+            <div>   
+                <p>Tempus gravida risus, ac faucibus purus laoreet at. Quisque vitae turpis vestibulum nunc vestibulum pellentesque. Donec ut placerat velit. Nam in fringilla leo. Sed arcu augue, vestibulum vitae sapien vitae, dapibus dignissim est. Sed ornare venenatis dolor et iaculis. Donec nec sapien et justo vulputate finibus. Aliquam aliquet ultricies congue. Donec eu auctor ex. Vivamus at dapibus libero. Praesent non lacinia orci. Morbi facilisis nulla id nunc cursus pulvinar. Praesent purus elit, porttitor non metus et, tempor malesuada lacus.</p>
+                <p>Morbi vitae dapibus sem. Donec condimentum quis metus quis vulputate. Etiam porta eleifend enim sed varius. Duis sagittis mi quis lacinia vestibulum. Duis tristique purus nec libero feugiat pulvinar. Praesent laoreet ac lacus at volutpat. Morbi euismod, enim eget congue lacinia, eros arcu hendrerit ex, at fringilla justo ligula id ex. Etiam scelerisque ex vel nibh sagittis, id fermentum augue commodo. Cras facilisis augue at nisl maximus, rhoncus faucibus leo vulputate.</p>
+            </div>
+        </div>
+
+	</main>
+</Layout>
+
+<style>
+	.content {
+    display: grid;
+    gap: 4rem;
+}
+@media (min-width: 768px) {
+    .content {
+        grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+    }
+}
+</style>
